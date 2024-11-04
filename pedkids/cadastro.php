@@ -129,6 +129,8 @@ form button:hover {
 
         $result = mysqli_query($conexao, "INSERT INTO usuarios(nome, email, senha, cpf, telefone) 
         VALUES('$nome', '$email', '$senha', '$cpf', '$telefone')");
+
+        header('Location: login.php');
     }
 
 ?>

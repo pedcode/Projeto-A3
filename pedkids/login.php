@@ -111,7 +111,6 @@ form button:hover {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - PEDKIDS</title>
-    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -124,10 +123,10 @@ form button:hover {
     <div class="right-side">
     <div class="login-box">
         <h2>Seja bem-vindo!<br>Entre em sua Conta</h2>
-    <form>
+    <form action="testlogin.php" method="POST">
         <input type="email" name="email" placeholder="E-mail" required>
         <input type="password" name="senha" placeholder="Senha" required>
-        <button type="submit">Entrar</button>
+        <button type="submit" name="submit">Entrar</button>
     </form>
         <p>Ainda não é cadastrado? <a href="cadastro.php">Registre-se</a></p>
     </div>
