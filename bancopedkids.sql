@@ -1,3 +1,5 @@
+SELECT * FROM `cadastropedkids`.usuarios;
+
 CREATE TABLE `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
