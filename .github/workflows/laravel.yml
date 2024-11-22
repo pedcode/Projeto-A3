@@ -56,4 +56,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          ./tests/cadastrotest.php
+          ./tests/CadastroTest.php
