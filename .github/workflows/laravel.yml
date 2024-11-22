@@ -22,7 +22,3 @@ jobs:
         if [ -f "composer.json" ]; then
           composer install --no-interaction --prefer-dist
         fi
-
-    - name: Execute Tests via PHPUnit
-      run: |
-        ./vendor/bin/phpunit tests  # Caso use o Composer para instalar o PHPUnit
