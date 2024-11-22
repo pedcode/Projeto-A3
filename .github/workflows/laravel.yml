@@ -32,17 +32,19 @@ jobs:
             composer install --no-interaction --prefer-dist
           fi
 
-            - name: Wait for MySQL
-          run: |
-          echo "Waiting for MySQL to be ready..."
-          for i in {1..15}; do  # Tentativas aumentadas para 15
-            if mysqladmin ping -h"localhost" --silent; then
-              echo "MySQL is ready"
-              break
-            fi
-            echo "Waiting for MySQL to be ready... Attempt $i"
-            sleep 2
-          done
+      - name: Wait for MySQL
+        run: |
+            echo "Waiting for MySQL to be ready..."
+            for i in {1..15}; do  # Tentativas aumentadas para 15
+              # Tenta verificar a conexão via mysqladmin ping
+              if mysqladmin -h "localhost" --user=root --password=root ping --silent; then
+                echo "MySQL is ready"
+                break
+              fi
+              echo "Waiting for MySQL to be ready... Attempt $i"
+              sleep 2  # Aguardar 2 segundos antes de tentar novamente
+            done
+
 
 
       - name: Run Tests
