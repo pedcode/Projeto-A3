@@ -10,7 +10,7 @@ jobs:
       mysql:
         image: mysql:8.0.40
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: admin
           MYSQL_DATABASE: cadastropedkids
         ports:
           - 3306:3306
