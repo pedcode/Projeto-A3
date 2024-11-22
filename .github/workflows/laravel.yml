@@ -16,7 +16,6 @@ jobs:
           - 3306:3306
         options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=5
 
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -25,6 +24,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
+
       - name: Install PHPUnit
         run: |
           composer require --dev phpunit/phpunit ^9
@@ -32,12 +32,6 @@ jobs:
       - name: Install Composer dependencies
         run: |
           composer install --no-interaction --prefer-dist
-
-      - name: Install Dependencies
-        run: |
-          if [ -f "composer.json" ]; then
-            composer install --no-interaction --prefer-dist
-          fi
 
       - name: Wait for MySQL
         run: |
@@ -52,8 +46,6 @@ jobs:
               sleep 2  # Aguardar 2 segundos antes de tentar novamente
             done
 
-
-
       - name: Run Tests
         run: |
-          ./tests/CadastroTest.php
+          ./vendor/bin/phpunit ./tests/CadastroTest.php
