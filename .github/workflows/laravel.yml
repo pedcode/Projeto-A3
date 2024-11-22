@@ -22,3 +22,13 @@ jobs:
         if [ -f "composer.json" ]; then
           composer install --no-interaction --prefer-dist
         fi
+
+       
+  deploy_dev:
+    name: Deploy Desenvolvimento
+    runs-on: ubuntu-latest
+    environment: dev
+    needs: [php-tests]
+    steps:
+      - name: Test
+        run: echo 'Deploy Dev'
