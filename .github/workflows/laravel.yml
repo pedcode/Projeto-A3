@@ -6,29 +6,38 @@ on:
 jobs:
   php-tests:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: cadastropedkids
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'  # Ajuste para a versão do PHP que está usando
-        extensions: mbstring, pdo, json
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
 
-    - name: Install Dependencies
-      run: |
-        if [ -f "composer.json" ]; then
-          composer install --no-interaction --prefer-dist
-        fi
+      - name: Install Dependencies
+        run: |
+          if [ -f "composer.json" ]; then
+            composer install --no-interaction --prefer-dist
+          fi
 
-       
-  deploy_dev:
-    name: Deploy Desenvolvimento
-    runs-on: ubuntu-latest
-    environment: dev
-    needs: [php-tests]
-    steps:
-      - name: Test
-        run: echo 'Deploy Dev'
+      - name: Wait for MySQL
+        run: |
+          until mysqladmin ping -h"localhost" --silent; do
+            echo "Waiting for MySQL to be ready..."
+            sleep 2
+          done
+
+      - name: Run Tests
+        run: |
+          ./vendor/bin/phpunit tests
