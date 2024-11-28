@@ -45,7 +45,10 @@ jobs:
               echo "Waiting for MySQL to be ready... Attempt $i"
               sleep 2  # Aguardar 2 segundos antes de tentar novamente
             done
-
+      - name: Set permissions for test files
+        run: |
+          chmod +x ./tests/CadastroTest.php
+        
       - name: Run Tests
         run: |
           ./tests/CadastroTest.php
