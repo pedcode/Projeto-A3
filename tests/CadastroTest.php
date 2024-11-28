@@ -1,4 +1,3 @@
-// tests/CadastroTest.php
 <?php
 
 use PHPUnit\Framework\TestCase;
