@@ -15,12 +15,15 @@ class CadastroTest extends TestCase
         $telefone = "11987654321";
 
         // Simula o cadastro do usuário
-        require_once 'cadastro.php';
         $resultado = cadastrarUsuario($nome, $email, $senha, $cpf, $telefone);
 
         // Verifica se o usuário foi cadastrado com sucesso
         $this->assertTrue($resultado);
     }
+
+    // Outros testes permanecem os mesmos
+}
+
 
     // Teste de cadastro inválido com email repetido
     public function testCadastroEmailRepetido()
