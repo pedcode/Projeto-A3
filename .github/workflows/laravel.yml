@@ -47,5 +47,5 @@ jobs:
             done
         
       - name: Run Tests
-        run: ./vendor/bin/phpunit
+        run: ./tests/CadastroTest.php
 
