@@ -33,6 +33,11 @@ jobs:
         run: |
           composer install --no-interaction --prefer-dist
 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: '8.1'
+            
       - name: Wait for MySQL
         run: |
             echo "Waiting for MySQL to be ready..."
